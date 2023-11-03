@@ -6,6 +6,7 @@ use DateTimeInterface;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model as BaseModel;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Str;
 
 /**
@@ -33,5 +34,15 @@ abstract class Model extends BaseModel
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->toIso8601ZuluString();
+    }
+
+    /**
+     * Get the morph alias associated with the model.
+     */
+    public static function getMorphAlias(): string
+    {
+        return in_array(static::class, Relation::$morphMap)
+            ? array_search(static::class, Relation::$morphMap, true)
+            : Str::snake(class_basename(static::class));
     }
 }
