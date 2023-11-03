@@ -22,7 +22,7 @@ abstract class Model extends BaseModel
 
     public $incrementing = false;
 
-    public function newUniqueId(): string
+    public function newUniqueId()
     {
         return (string) Str::ulid();
     }
@@ -30,7 +30,7 @@ abstract class Model extends BaseModel
     /**
      * @param  \Carbon\CarbonImmutable  $date
      */
-    protected function serializeDate(DateTimeInterface $date): string
+    protected function serializeDate(DateTimeInterface $date)
     {
         return $date->toIso8601ZuluString();
     }
