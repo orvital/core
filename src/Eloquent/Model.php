@@ -2,11 +2,11 @@
 
 namespace Orvital\Core\Eloquent;
 
+use DateTimeInterface;
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model as BaseModel;
-use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Support\Str;
-use DateTimeInterface;
 
 /**
  * @mixin \Illuminate\Database\Eloquent\Builder
@@ -15,14 +15,14 @@ use DateTimeInterface;
  */
 abstract class Model extends BaseModel
 {
-    use HasUlids;
     use HasFactory;
+    use HasUlids;
 
     protected $keyType = 'string';
 
     public $incrementing = false;
 
-    public function newUniqueId(): array
+    public function newUniqueId(): string
     {
         return (string) Str::ulid();
     }
