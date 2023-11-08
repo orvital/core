@@ -7,6 +7,9 @@ use Illuminate\Database\MigrationServiceProvider as BaseMigrationServiceProvider
 use Orvital\Core\Database\Migrations\DatabaseMigrationRepository;
 use Orvital\Core\Database\Migrations\MigrationCreator;
 
+/**
+ * @property-read \Orvital\Core\Foundation\Application $app
+ */
 class MigrationServiceProvider extends BaseMigrationServiceProvider
 {
     protected function registerRepository()

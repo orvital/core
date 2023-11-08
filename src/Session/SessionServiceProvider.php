@@ -7,6 +7,9 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Session\SessionServiceProvider as BaseSessionServiceProvider;
 use Orvital\Core\Session\SessionManager;
 
+/**
+ * @property-read \Orvital\Core\Foundation\Application $app
+ */
 class SessionServiceProvider extends BaseSessionServiceProvider
 {
     public function register()
