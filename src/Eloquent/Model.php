@@ -37,17 +37,12 @@ abstract class Model extends BaseModel
     }
 
     /**
-     * Get the model class alias associated with the morph map.
+     * Get the model alias associated with the morph map.
      */
-    public static function getAlias(): string
+    public static function getMorphAlias(): string
     {
         return in_array(static::class, Relation::$morphMap)
             ? array_search(static::class, Relation::$morphMap, true)
             : Str::snake(class_basename(static::class));
-    }
-
-    public function getMorphClass()
-    {
-        return static::getAlias();
     }
 }
