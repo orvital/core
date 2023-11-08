@@ -1,6 +1,6 @@
 <?php
 
-namespace Orvital\Core\Eloquent;
+namespace Orvital\Core\Database\Eloquent;
 
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
