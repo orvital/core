@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Str;
 
 /**
- * @mixin \Illuminate\Database\Eloquent\Builder
+ * @mixin \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model
  *
  * @property-read string $id
  */
@@ -37,12 +37,17 @@ abstract class Model extends BaseModel
     }
 
     /**
-     * Get the morph alias associated with the model.
+     * Get the model class alias associated with the morph map.
      */
-    public static function getMorphAlias(): string
+    public static function getAlias(): string
     {
         return in_array(static::class, Relation::$morphMap)
             ? array_search(static::class, Relation::$morphMap, true)
             : Str::snake(class_basename(static::class));
+    }
+
+    public function getMorphClass()
+    {
+        return static::getAlias();
     }
 }
