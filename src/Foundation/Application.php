@@ -2,6 +2,7 @@
 
 namespace Orvital\Core\Foundation;
 
+use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Foundation\Application as BaseApplication;
 
 class Application extends BaseApplication
@@ -33,8 +34,8 @@ class Application extends BaseApplication
             'log' => [\Illuminate\Log\LogManager::class, \Psr\Log\LoggerInterface::class],
             'mail.manager' => [\Illuminate\Mail\MailManager::class, \Illuminate\Contracts\Mail\Factory::class],
             'mailer' => [\Illuminate\Mail\Mailer::class, \Illuminate\Contracts\Mail\Mailer::class, \Illuminate\Contracts\Mail\MailQueue::class],
-            'auth.password' => [\Illuminate\Auth\Passwords\PasswordBrokerManager::class, \Illuminate\Contracts\Auth\PasswordBrokerFactory::class],
-            'auth.password.broker' => [\Illuminate\Auth\Passwords\PasswordBroker::class, \Illuminate\Contracts\Auth\PasswordBroker::class],
+            'auth.password' => [\Orvital\Core\Auth\Passwords\PasswordBrokerManager::class, \Illuminate\Contracts\Auth\PasswordBrokerFactory::class],
+            'auth.password.broker' => [\Orvital\Core\Auth\Passwords\PasswordBroker::class, \Illuminate\Contracts\Auth\PasswordBroker::class],
             'queue' => [\Illuminate\Queue\QueueManager::class, \Illuminate\Contracts\Queue\Factory::class, \Illuminate\Contracts\Queue\Monitor::class],
             'queue.connection' => [\Illuminate\Contracts\Queue\Queue::class],
             'queue.failer' => [\Illuminate\Queue\Failed\FailedJobProviderInterface::class],
@@ -53,5 +54,35 @@ class Application extends BaseApplication
                 $this->alias($key, $alias);
             }
         }
+    }
+
+    /**
+     * Get the container's abstract aliases.
+     *
+     * @return array
+     */
+    public function getAbstractAliases()
+    {
+        return $this->abstractAliases;
+    }
+
+    /**
+     * Get the application's service providers.
+     *
+     * @return array
+     */
+    public function getServiceProviders()
+    {
+        return $this->serviceProviders;
+    }
+
+    /**
+     * Determine if the given service provider is deferred.
+     *
+     * @return bool
+     */
+    public function providerIsDeferred(string $provider)
+    {
+        return in_array(DeferrableProvider::class, class_implements($provider));
     }
 }
