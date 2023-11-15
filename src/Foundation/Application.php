@@ -57,6 +57,16 @@ class Application extends BaseApplication
     }
 
     /**
+     * Get the container's instances.
+     *
+     * @return array
+     */
+    public function getInstances()
+    {
+        return $this->instances;
+    }
+
+    /**
      * Get the container's abstract aliases.
      *
      * @return array
