@@ -2,6 +2,7 @@
 
 namespace Orvital\Core\Auth\Concerns;
 
+use Illuminate\Support\Facades\Notification;
 use Orvital\Core\Auth\Notifications\VerifyEmail;
 
 /**
@@ -53,7 +54,7 @@ trait MustVerifyEmail
      */
     public function sendEmailVerificationNotification()
     {
-        $this->notify(new VerifyEmail);
+        Notification::send($this, new VerifyEmail());
     }
 
     /**

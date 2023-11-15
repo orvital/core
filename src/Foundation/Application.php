@@ -28,6 +28,7 @@ class Application extends BaseApplication
             'filesystem' => [\Illuminate\Filesystem\FilesystemManager::class, \Illuminate\Contracts\Filesystem\Factory::class],
             'filesystem.disk' => [\Illuminate\Contracts\Filesystem\Filesystem::class],
             'filesystem.cloud' => [\Illuminate\Contracts\Filesystem\Cloud::class],
+            'notification' => [\Illuminate\Notifications\ChannelManager::class, \Illuminate\Contracts\Notifications\Dispatcher::class, \Illuminate\Contracts\Notifications\Factory::class],
             'hash' => [\Illuminate\Hashing\HashManager::class],
             'hash.driver' => [\Illuminate\Contracts\Hashing\Hasher::class],
             'translator' => [\Illuminate\Translation\Translator::class, \Illuminate\Contracts\Translation\Translator::class],

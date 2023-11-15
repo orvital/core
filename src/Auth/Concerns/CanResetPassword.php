@@ -2,6 +2,7 @@
 
 namespace Orvital\Core\Auth\Concerns;
 
+use Illuminate\Support\Facades\Notification;
 use Orvital\Core\Auth\Notifications\ResetPassword;
 
 /**
@@ -29,6 +30,6 @@ trait CanResetPassword
      */
     public function sendPasswordResetNotification($token)
     {
-        $this->notify(new ResetPassword($token));
+        Notification::send($this, new ResetPassword($token));
     }
 }
