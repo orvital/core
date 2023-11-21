@@ -1,6 +1,33 @@
 # Core
 Core package.
 
+## Service Container
+
+### Typed Container Resolver
+
+Use the `makeAs` method to resolve from the container a class instance of a specific type.
+
+```php
+makeAs(string $abstract, array $parameters = [], string $expected = null): mixed
+```
+
+#### Usage
+
+If you bound an object to its class-string
+```php
+$typed = app()->makeAs(Bound::class);
+```
+
+Of course, you can pass in parameters
+```php
+$typed = app()->makeAs(Bound::class, []);
+```
+
+If you bound an object with a magic string
+```php
+$typed = app()->makeAs('magic-string', [], Bound::class);
+```
+
 ## Eloquent
 
 ### Date Serialization
