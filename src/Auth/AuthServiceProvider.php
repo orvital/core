@@ -31,13 +31,19 @@ class AuthServiceProvider extends BaseAuthServiceProvider
         });
 
         Gate::guessPolicyNamesUsing(function (string $modelName) {
-            $policyName = Str::finish($modelName, 'Policy');
+            $modelBase = class_basename($modelName);
+            $policyBase = Str::finish($modelBase, 'Policy');
 
-            if (class_exists($policyName)) {
-                return $policyName;
+            foreach ([
+                Str::replaceLast($modelBase, $policyBase, $modelName),
+                Str::replaceLast($modelBase, 'Policies\\'.$policyBase, $modelName),
+            ] as $policyName) {
+                if (class_exists($policyName)) {
+                    return $policyName;
+                }
             }
 
-            return $this->app->getNamespace().'Policies\\'.class_basename($policyName);
+            return Str::start($policyBase, 'App\\Policies\\');
         });
     }
 }

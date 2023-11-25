@@ -38,16 +38,19 @@ class DatabaseServiceProvider extends BaseDatabaseServiceProvider
     protected function bootFactoryCallbacks()
     {
         Factory::guessFactoryNamesUsing(function (string $modelName) {
-            // "App\User\UserFactory", "App\Models\UserFactory" ...
-            $factoryName = Str::finish($modelName, 'Factory');
+            $modelBase = class_basename($modelName);
+            $factoryBase = Str::finish($modelBase, 'Factory');
 
-            // Check in the same namespace
-            if (class_exists($factoryName)) {
-                return $factoryName;
+            foreach ([
+                Str::replaceLast($modelBase, $factoryBase, $modelName),
+                Str::replaceLast($modelBase, 'Factories\\'.$factoryBase, $modelName),
+            ] as $factoryName) {
+                if (class_exists($factoryName)) {
+                    return $factoryName;
+                }
             }
 
-            // Return default factory namespace: "Database\Factories\UserFactory"
-            return Str::start(class_basename($factoryName), Factory::$namespace);
+            return Str::start($factoryBase, Factory::$namespace);
         });
 
         Factory::guessModelNamesUsing(function (Factory $factory) {
