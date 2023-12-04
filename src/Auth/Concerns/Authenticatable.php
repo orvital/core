@@ -17,16 +17,6 @@ trait Authenticatable
     const REMEMBER_ME = 'remember';
 
     /**
-     * Initializer called on each new model instance.
-     */
-    public function initializeAuthenticatable(): void
-    {
-        $this->mergeFillable(['email', 'password']);
-        $this->makeHidden(['password', $this->getRememberTokenName()]);
-        $this->mergeCasts(['password' => 'hashed']);
-    }
-
-    /**
      * Get the name of the unique identifier for the user.
      *
      * @return string

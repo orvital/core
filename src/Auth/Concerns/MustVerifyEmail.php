@@ -20,14 +20,6 @@ trait MustVerifyEmail
     const VERIFIED_AT = 'verified_at';
 
     /**
-     * Initializer called on each new model instance.
-     */
-    public function initializeMustVerifyEmail(): void
-    {
-        $this->mergeCasts([$this->getVerifiedAtColumn() => 'datetime']);
-    }
-
-    /**
      * Determine if the user has verified their email address.
      *
      * @return bool
