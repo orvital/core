@@ -54,18 +54,15 @@ class DatabaseServiceProvider extends BaseDatabaseServiceProvider
         });
 
         Factory::guessModelNamesUsing(function (Factory $factory) {
-            // "App\User\User" or "App/User"
             $modelName = Str::of(get_class($factory))
                 ->between(Factory::$namespace, 'Factory')
                 ->start($this->app->getNamespace())
                 ->toString();
 
-            // Check in the same namespace
             if (class_exists($modelName)) {
                 return $modelName;
             }
 
-            // Return default models namespace: "App\Models\User"
             return $this->app->getNamespace().'Models\\'.class_basename($modelName);
         });
     }

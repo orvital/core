@@ -2,14 +2,11 @@
 
 namespace Orvital\Core\Support\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Orvital\Core\Support\Concerns\RegistersListeners;
 use Orvital\Core\Support\Concerns\RegistersObservers;
 use Orvital\Core\Support\Concerns\RegistersSubscribers;
+use Orvital\Core\Support\ServiceProvider;
 
-/**
- * @property-read \Orvital\Core\Foundation\Application $app
- */
 class EventServiceProvider extends ServiceProvider
 {
     use RegistersListeners;

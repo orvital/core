@@ -1,6 +1,6 @@
 <?php
 
-namespace Orvital\Core\Contracts\Auth;
+namespace Orvital\Core\Auth\Contracts;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\CanResetPassword;

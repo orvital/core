@@ -1,6 +1,6 @@
 <?php
 
-namespace Orvital\Core\Contracts\Auth;
+namespace Orvital\Core\Auth\Contracts;
 
 interface Authorizable
 {

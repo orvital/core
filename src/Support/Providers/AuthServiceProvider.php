@@ -2,12 +2,9 @@
 
 namespace Orvital\Core\Support\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Orvital\Core\Support\Concerns\RegistersPolicies;
+use Orvital\Core\Support\ServiceProvider;
 
-/**
- * @property-read \Orvital\Core\Foundation\Application $app
- */
 class AuthServiceProvider extends ServiceProvider
 {
     use RegistersPolicies;

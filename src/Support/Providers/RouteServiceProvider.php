@@ -5,12 +5,10 @@ namespace Orvital\Core\Support\Providers;
 use Closure;
 use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Routing\Router;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\ForwardsCalls;
+use Orvital\Core\Support\ServiceProvider;
 
 /**
- * @property-read \Orvital\Core\Foundation\Application $app
- *
  * @mixin \Illuminate\Routing\Router
  */
 class RouteServiceProvider extends ServiceProvider

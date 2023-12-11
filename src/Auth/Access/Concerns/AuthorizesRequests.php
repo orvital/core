@@ -1,6 +1,6 @@
 <?php
 
-namespace Orvital\Core\Auth\Concerns;
+namespace Orvital\Core\Auth\Access\Concerns;
 
 use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Support\Str;
@@ -108,7 +108,7 @@ trait AuthorizesRequests
     protected function resourceAbilityMap()
     {
         return [
-            'index' => 'viewAny',
+            'index' => 'list',
             'show' => 'view',
             'create' => 'create',
             'store' => 'create',
