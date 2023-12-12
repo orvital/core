@@ -24,7 +24,7 @@ class PasswordBroker implements PasswordBrokerContract
     /**
      * Send a password reset link to a user.
      */
-    public function sendResetLink(array $credentials, Closure $callback = null): string
+    public function sendResetLink(array $credentials, ?Closure $callback = null): string
     {
         // First we will check to see if we found a user at the given credentials and
         // if we did not we will redirect back to this current URI with a piece of
@@ -35,20 +35,20 @@ class PasswordBroker implements PasswordBrokerContract
             return static::INVALID_USER;
         }
 
-        if ($this->tokenRecent($user)) {
+        if ($this->tokens->recentlyCreatedToken($user)) {
             return static::RESET_THROTTLED;
         }
 
         $token = $this->createToken($user);
 
         if ($callback) {
-            $callback($user, $token);
-        } else {
-            // Once we have the reset token, we are ready to send the message out to this
-            // user with a link to reset their password. We will then redirect back to
-            // the current URI having nothing set in the session to indicate errors.
-            $user->sendPasswordResetNotification($token);
+            return $callback($user, $token) ?? static::RESET_LINK_SENT;
         }
+
+        // Once we have the reset token, we are ready to send the message out to this
+        // user with a link to reset their password. We will then redirect back to
+        // the current URI having nothing set in the session to indicate errors.
+        $user->sendPasswordResetNotification($token);
 
         return static::RESET_LINK_SENT;
     }
@@ -116,14 +116,6 @@ class PasswordBroker implements PasswordBrokerContract
     public function tokenExists(CanResetPasswordContract $user, string $token): bool
     {
         return $this->tokens->exists($user, $token);
-    }
-
-    /**
-     * Determine if the given user recently created a password reset token.
-     */
-    public function tokenRecent(CanResetPasswordContract $user): bool
-    {
-        return $this->tokens->recentlyCreatedToken($user);
     }
 
     /**

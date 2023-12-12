@@ -15,8 +15,8 @@ class DatabaseTokenRepository implements TokenRepositoryInterface
     public function __construct(
         protected ConnectionInterface $connection,
         protected HasherContract $hasher,
+        protected string $key,
         protected string $table,
-        protected string $hashKey,
         protected int $expires = 60 * 60,
         protected int $throttle = 60
     ) {
@@ -108,7 +108,19 @@ class DatabaseTokenRepository implements TokenRepositoryInterface
      */
     public function createNewToken(): string
     {
-        return hash_hmac('sha256', Str::random(40), $this->hashKey);
+        return hash_hmac('sha256', Str::random(40), $this->getKey());
+    }
+
+    /**
+     * Return the application key.
+     */
+    public function getKey(): string
+    {
+        if (Str::startsWith($this->key, 'base64:')) {
+            return base64_decode(mb_substr($this->key, 7));
+        }
+
+        return $this->key;
     }
 
     /**

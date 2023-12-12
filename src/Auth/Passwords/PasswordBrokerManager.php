@@ -54,19 +54,11 @@ class PasswordBrokerManager implements PasswordBrokerFactoryContract
 
     protected function createTokenRepository(array $config)
     {
-        $key = $this->app['config']['app.key'];
-
-        if (str_starts_with($key, 'base64:')) {
-            $key = base64_decode(substr($key, 7));
-        }
-
-        $connection = $config['connection'] ?? null;
-
         return new DatabaseTokenRepository(
-            $this->app['db']->connection($connection),
+            $this->app['db']->connection($config['connection'] ?? null),
             $this->app['hash'],
+            $this->app['config']['app.key'],
             $config['table'],
-            $key,
             $config['expire'],
             $config['throttle'] ?? 0
         );
