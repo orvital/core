@@ -2,9 +2,7 @@
 
 namespace Orvital\Core\Database\Eloquent;
 
-use DateTimeInterface;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model as BaseModel;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Str;
@@ -16,7 +14,6 @@ use Illuminate\Support\Str;
  */
 abstract class Model extends BaseModel
 {
-    use HasFactory;
     use HasUlids;
 
     protected $keyType = 'string';
@@ -26,14 +23,6 @@ abstract class Model extends BaseModel
     public function newUniqueId()
     {
         return (string) Str::ulid();
-    }
-
-    /**
-     * @param  \Carbon\CarbonImmutable  $date
-     */
-    protected function serializeDate(DateTimeInterface $date)
-    {
-        return $date->toIso8601ZuluString();
     }
 
     /**

@@ -2,12 +2,10 @@
 
 namespace Orvital\Core\Database;
 
-use Carbon\CarbonImmutable;
 use Illuminate\Database\DatabaseServiceProvider as BaseDatabaseServiceProvider;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Schema\Builder;
-use Illuminate\Support\Facades\Date;
 
 /**
  * @property-read \Orvital\Core\Foundation\Application $app
@@ -27,7 +25,5 @@ class DatabaseServiceProvider extends BaseDatabaseServiceProvider
         Builder::defaultMorphKeyType('ulid');
 
         Relation::requireMorphMap();
-
-        Date::use(CarbonImmutable::class);
     }
 }
