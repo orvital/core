@@ -18,7 +18,7 @@ class Application extends BaseApplication
     protected function overrideCoreContainerAliases()
     {
         $replacements = [
-            \Illuminate\Foundation\Application::class, self::class,
+            \Illuminate\Foundation\Application::class => self::class,
             \Illuminate\Auth\Passwords\PasswordBrokerManager::class => \Orvital\Core\Auth\Passwords\PasswordBrokerManager::class,
             \Illuminate\Auth\Passwords\PasswordBroker::class => \Orvital\Core\Auth\Passwords\PasswordBroker::class,
             \Illuminate\Session\SessionManager::class => \Orvital\Core\Session\SessionManager::class,
