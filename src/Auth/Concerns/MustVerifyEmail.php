@@ -6,8 +6,6 @@ use Illuminate\Support\Facades\Notification;
 use Orvital\Core\Auth\Notifications\VerifyEmail;
 
 /**
- * @mixin \Orvital\Core\Database\Eloquent\Model
- *
  * @see \Illuminate\Contracts\Auth\MustVerifyEmail
  */
 trait MustVerifyEmail

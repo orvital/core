@@ -4,7 +4,6 @@ namespace Orvital\Core\Database;
 
 use Illuminate\Database\DatabaseServiceProvider as BaseDatabaseServiceProvider;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Schema\Builder;
 
 /**
@@ -23,7 +22,5 @@ class DatabaseServiceProvider extends BaseDatabaseServiceProvider
         Builder::defaultStringLength(192);
 
         Builder::defaultMorphKeyType('ulid');
-
-        Relation::requireMorphMap();
     }
 }

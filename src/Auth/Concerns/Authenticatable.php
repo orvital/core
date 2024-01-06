@@ -3,8 +3,6 @@
 namespace Orvital\Core\Auth\Concerns;
 
 /**
- * @mixin \Orvital\Core\Database\Eloquent\Model
- *
  * @see \Illuminate\Contracts\Auth\Authenticatable
  */
 trait Authenticatable
