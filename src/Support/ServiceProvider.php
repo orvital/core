@@ -9,15 +9,19 @@ use Illuminate\Support\ServiceProvider as BaseServiceProvider;
  */
 abstract class ServiceProvider extends BaseServiceProvider
 {
-    public static function defaultProviders()
+    public static function extendedProviders()
     {
-        return parent::defaultProviders()->replace([
-            \Illuminate\Auth\AuthServiceProvider::class => \Orvital\Core\Auth\AuthServiceProvider::class,
-            \Illuminate\Database\DatabaseServiceProvider::class => \Orvital\Core\Database\DatabaseServiceProvider::class,
-            \Illuminate\Session\SessionServiceProvider::class => \Orvital\Core\Session\SessionServiceProvider::class,
-            \Illuminate\Foundation\Providers\ConsoleSupportServiceProvider::class => \Orvital\Core\Foundation\Providers\ConsoleSupportServiceProvider::class,
-            \Illuminate\Foundation\Providers\FoundationServiceProvider::class => \Orvital\Core\Foundation\Providers\FoundationServiceProvider::class,
-            \Illuminate\Notifications\NotificationServiceProvider::class => \Orvital\Core\Notifications\NotificationServiceProvider::class,
-        ]);
+        $providers = [
+            \Orvital\Core\Auth\AuthServiceProvider::class,
+            \Orvital\Core\Foundation\Providers\ConsoleSupportServiceProvider::class,
+            \Orvital\Core\Database\DatabaseServiceProvider::class,
+            \Orvital\Core\Foundation\Providers\FoundationServiceProvider::class,
+            \Orvital\Core\Notifications\NotificationServiceProvider::class,
+            \Orvital\Core\Session\SessionServiceProvider::class,
+        ];
+
+        $keyed = collect($providers)->keyBy(fn ($class) => get_parent_class($class))->all();
+
+        return static::defaultProviders()->replace($keyed);
     }
 }
