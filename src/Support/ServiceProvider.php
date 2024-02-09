@@ -9,6 +9,11 @@ use Illuminate\Support\ServiceProvider as BaseServiceProvider;
  */
 abstract class ServiceProvider extends BaseServiceProvider
 {
+    /**
+     * Get the extended default providers for the application.
+     *
+     * @return \Illuminate\Support\DefaultProviders
+     */
     public static function extendedProviders()
     {
         $providers = [
