@@ -7,15 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Builder;
 
 /**
- * @property-read \Orvital\Core\Foundation\Application $app
+ * @property-read \Illuminate\Foundation\Application $app
  */
 class DatabaseServiceProvider extends BaseDatabaseServiceProvider
 {
     public function boot()
     {
-        Model::setConnectionResolver($this->app['db']);
-
-        Model::setEventDispatcher($this->app['events']);
+        parent::boot();
 
         Model::shouldBeStrict(! $this->app->isProduction());
 

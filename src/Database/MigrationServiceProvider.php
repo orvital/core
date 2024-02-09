@@ -8,14 +8,18 @@ use Orvital\Core\Database\Migrations\DatabaseMigrationRepository;
 use Orvital\Core\Database\Migrations\MigrationCreator;
 
 /**
- * @property-read \Orvital\Core\Foundation\Application $app
+ * @property-read \Illuminate\Foundation\Application $app
  */
 class MigrationServiceProvider extends BaseMigrationServiceProvider
 {
     protected function registerRepository()
     {
         $this->app->singleton('migration.repository', function ($app) {
-            return new DatabaseMigrationRepository($app['db'], $app['config']['database.migrations']);
+            $migrations = $app['config']['database.migrations'];
+
+            $table = is_array($migrations) ? ($migrations['table'] ?? null) : $migrations;
+
+            return new DatabaseMigrationRepository($app['db'], $table);
         });
     }
 

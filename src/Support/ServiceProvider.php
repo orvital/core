@@ -17,12 +17,10 @@ abstract class ServiceProvider extends BaseServiceProvider
     public static function extendedProviders()
     {
         $providers = [
-            \Orvital\Core\Auth\AuthServiceProvider::class,
             \Orvital\Core\Foundation\Providers\ConsoleSupportServiceProvider::class,
             \Orvital\Core\Database\DatabaseServiceProvider::class,
             \Orvital\Core\Foundation\Providers\FoundationServiceProvider::class,
             \Orvital\Core\Notifications\NotificationServiceProvider::class,
-            \Orvital\Core\Session\SessionServiceProvider::class,
         ];
 
         $keyed = collect($providers)->keyBy(fn ($class) => get_parent_class($class))->all();
